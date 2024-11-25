@@ -75,3 +75,32 @@ print("Data stored successfully!")
 
 - product information is based on US availability
 - this might skew data slightly for products/youtubers based in other countries, such as Grog! being australian 
+
+Query of average views and average likes if a company name, url, or product url is found in the description: 
+```
+SELECT company_found,
+        ROUND(AVG(avg_views),2) AS total_avg_views,
+        ROUND(AVG(avg_likes),2) AS total_avg_likes
+FROM
+    (SELECT v.channel,
+        CASE 
+          WHEN v.description LIKE '%'|| c.company ||'%' 
+         OR v.description LIKE '%' || c.url || '%' 
+         OR v.description LIKE '%' || p.product_url || '%'
+            THEN 'Yes'
+        WHEN v.description LIKE '%Code%' AND v.description NOT LIKE '%'|| c.company|| '%' THEN 'No'
+        ELSE 'No'
+    END AS company_found,
+    COUNT( DISTINCT v.title) AS video_count, 
+    ROUND(AVG(DISTINCT v.views), 2) AS avg_views,
+    ROUND(AVG(DISTINCT v.likes), 2) AS avg_likes
+FROM youtube_videos AS v
+LEFT JOIN companies AS c
+    ON c.channel = v.channel
+LEFT JOIN youtuber_products AS p
+    ON p.company = c.company
+GROUP BY v.channel, company_found) AS company_views
+
+GROUP BY company_found
+ORDER BY total_avg_views DESC;
+```
