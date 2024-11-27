@@ -1,6 +1,55 @@
 #Cleaning Data
 - Cleaned duplicate entries in products table for clothing available in different sizes.
-- Cleaned errors of the brand Cloak's products listing the collection in the company tag instead of Cloak.
+    First made sure all clothing was properly marked as Apparel in product_type.
+```
+  SELECT DISTINCT product_type
+  FROM youtuber_products;
+
+  UPDATE youtuber_products
+  SET product_type = 'Apparel'
+  WHERE product_type IN ('Clothing','HOODIE', 'JACKET', 'SWEATER', 'CARDIGAN', 'CLOAK', 'CREW', 'JOGGER','PAJAMA PANTS','SHORT','PANT','SOCK','BRA%','THONG','BOXER%','UNDERWEAR');
+```
+ Then checked to see if any products only came in medium sizes but didn't come in a small. 
+ ```
+ SELECT product_name
+FROM youtuber_products
+WHERE product_type = 'Apparel'
+AND( 
+    product_name LIKE '%Sm%' 
+    OR product_name LIKE '%Md%'
+    OR product_name LIKE '%Medium%');
+```
+Next I cleaned up clothing of all sizes that weren't small, after checking the results to ensure there were no issues. 
+```
+DELETE FROM youtuber_products
+WHERE product_type LIKE 'Apparel' 
+AND (
+    product_name LIKE '%XS%'
+    OR product_name LIKE ''
+    OR product_name LIKE '%Medium%'
+    OR product_name LIKE '%MD%'
+    OR product_name LIKE '%Large%'
+    OR product_name LIKE '%LG%'
+    OR product_name LIKE '%X-Large'
+    OR product_name LIKE '%XL%'
+    OR product_name LIKE '%XX-Large%'
+    OR product_name LIKE '%XXX-Large%'
+    OR product_name LIKE '%2X%'
+    OR product_name LIKE '%3X%'
+    OR product_name LIKE '%4X%'
+    OR product_name LIKE '%5X%'
+    OR product_name LIKE '%32%'
+    OR product_name LIKE '%34%'
+    OR product_name LIKE '%36%'
+    OR product_name LIKE '%38%');
+```
+ -Cleaned errors of the brand Cloak's products listing the collection in the company tag instead of Cloak.
+  
+```
+UPDATE youtuber_products
+  SET company = 'Cloak'
+  WHERE product_url LIKE '%cloakbrand%';
+```
 - Cleaned up sale prices of items to assure all items were non-sale prices. 
 
 
