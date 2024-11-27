@@ -1,3 +1,26 @@
+#Cleaning Data
+- Cleaned duplicate entries in products table for clothing available in different sizes.
+- Cleaned errors of the brand Cloak's products listing the collection in the company tag instead of Cloak. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # youtuber_products
 
 script to fetch youtube videos -- 
