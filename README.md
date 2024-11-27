@@ -1,6 +1,7 @@
 #Cleaning Data
 - Cleaned duplicate entries in products table for clothing available in different sizes.
-- Cleaned errors of the brand Cloak's products listing the collection in the company tag instead of Cloak. 
+- Cleaned errors of the brand Cloak's products listing the collection in the company tag instead of Cloak.
+- Cleaned up sale prices of items to assure all items were non-sale prices. 
 
 
 
