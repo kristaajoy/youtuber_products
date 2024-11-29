@@ -1,6 +1,6 @@
-##Project is a Work In Progress
+## Project is a Work In Progress
 
-#Cleaning Data
+# Cleaning Data
 - Cleaned duplicate entries in products table for clothing available in different sizes.
     First made sure all clothing was properly marked as Apparel in product_type.
 ```
