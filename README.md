@@ -1,5 +1,15 @@
 # Project is a Work In Progress
 
+##Tables
+
+###youtube_videos
+columns: id, channel, title, duration, description, url, views, likes, comments, publish date
+Note: Only videos over 2 minutes are included.
+
+The following youtubers were not included in final calculations:
+-Mr. Beast - View count Outlier
+-Oompaville - Added company url to all videos despite launch date
+
 ## Cleaning Data
 - Cleaned duplicate entries in products table for clothing available in different sizes.
     First made sure all clothing was properly marked as Apparel in product_type.
